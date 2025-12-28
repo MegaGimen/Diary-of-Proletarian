@@ -2,6 +2,10 @@ from datetime import datetime, timedelta, date
 import random
 from scipy import stats
 import re
+import sys
+import io
+
+sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 
 def random_replace(text, old, replacements):
     """用列表中的随机字符串替换所有匹配，每个匹配替换多次"""
@@ -42,12 +46,11 @@ class DiaryElement:
 
 {self._replace_(self._replace_(self.template))}
 
------------------------------------------
 '''
         return ret
         
 工作日内容模板='''
-今天早上6点起，草草地刷完牙洗完脸就坐上了去公司的地铁。在地铁上，<地铁事件>。总之，9点钟就到了公司并并打卡，崭新的一天开始了！。
+今天早上6点起，草草地刷完牙洗完脸就坐上了去公司的地铁。在地铁上，<地铁事件>。总之，9点钟就到了公司并打卡，崭新的一天开始了！。
 
 在工作时，<工作时的随机事件>。
 
@@ -94,7 +97,7 @@ import json
 with open('mapping.json', 'r', encoding='utf-8') as f:
     mapping = json.load(f)
 
-FUTUREDAYS=30
+FUTUREDAYS=360
 today = date.today()
 print(f"今天的日期: {today}")
 
